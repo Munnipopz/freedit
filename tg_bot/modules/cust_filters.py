@@ -314,11 +314,6 @@ def __chat_settings__(chat_id, user_id):
     return "There are `{}` custom filters here.".format(len(cust_filters))
 
 
-CoffeeHouseAPI = API(LYDIA_API)
-api_client = LydiaAI(CoffeeHouseAPI)
-
-
-@run_async
 def add_chat(bot: Bot, update: Update):
     global api_client
     chat_id = update.effective_chat.id
@@ -334,7 +329,6 @@ def add_chat(bot: Bot, update: Update):
         msg.reply_text("Lydia is already enabled for this chat!")
         
         
-@run_async
 def remove_chat(bot: Bot, update: Update):
     msg = update.effective_message
     chat_id = update.effective_chat.id
