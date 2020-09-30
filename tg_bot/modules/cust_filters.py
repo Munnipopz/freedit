@@ -351,7 +351,6 @@ def check_message(bot: Bot, message):
         return False
                 
         
-@run_async
 def lydia(bot: Bot, update: Update):
     global api_client
     msg = update.effective_message
