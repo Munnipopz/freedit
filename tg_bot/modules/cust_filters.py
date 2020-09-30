@@ -22,6 +22,8 @@ from tg_bot.modules.connection import connected
 HANDLER_GROUP = 10
 BASIC_FILTER_STRING = "*Filters in this chat:*\n"
 
+CoffeeHouseAPI = API(LYDIA_API)
+api_client = LydiaAI(CoffeeHouseAPI)
 
 @run_async
 def list_handlers(bot: Bot, update: Update):
