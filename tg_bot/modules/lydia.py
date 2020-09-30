@@ -1,16 +1,23 @@
-# AI module using Intellivoid's Coffeehouse API by @TheRealPhoenix
+import re
+from typing import Optional
 
-from time import time, sleep
-from coffeehouse.lydia import LydiaAI
-from coffeehouse.api import API
-from coffeehouse.exception import CoffeeHouseError as CFError
+import telegram
+from telegram import ParseMode, InlineKeyboardMarkup, Message, Chat
+from telegram import Update, Bot
+from telegram.error import BadRequest
+from telegram.ext import CommandHandler, MessageHandler, DispatcherHandlerStop, run_async
+from telegram.utils.helpers import escape_markdown
 
-from telegram import Message, Chat, User, Update, Bot
-from telegram.ext import CommandHandler, MessageHandler, Filters, run_async
+from tg_bot import dispatcher, LOGGER
+from tg_bot.modules.disable import DisableAbleCommandHandler
+from tg_bot.modules.helper_funcs.chat_status import user_admin
+from tg_bot.modules.helper_funcs.extraction import extract_text
+from tg_bot.modules.helper_funcs.filters import CustomFilters
+from tg_bot.modules.helper_funcs.misc import build_keyboard
+from tg_bot.modules.helper_funcs.string_handling import split_quotes, button_markdown_parser
+from tg_bot.modules.sql import cust_filters_sql as sql
 
-from alluka import dispatcher, LYDIA_API, OWNER_ID
-import alluka.modules.sql.lydia_sql as sql
-from alluka.modules.helper_funcs.filters import CustomFilters
+from tg_bot.modules.connection import connected
 
 
 CoffeeHouseAPI = API(LYDIA_API)
